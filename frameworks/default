@@ -8,7 +8,12 @@ detect)
     exit 1
     ;;
 compile)
-    echo "-----> Setting up default configuration"
-    cp "$basedir/../conf/nginx/default_site.conf.erb" "$BUILD_DIR/conf/site.conf.erb"
+    if [ -f "./matomo.php" ]; then
+        echo "-----> Setting up matomo configuration"
+        cp "$basedir/../conf/nginx/matomo.conf.erb" "$BUILD_DIR/conf/site.conf.erb"
+    else
+        echo "-----> Setting up default configuration"
+        cp "$basedir/../conf/nginx/default_site.conf.erb" "$BUILD_DIR/conf/site.conf.erb"
+    fi
     ;;
 esac
